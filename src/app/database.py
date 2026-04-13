@@ -6,7 +6,6 @@ from app.config import settings
 
 engine = create_engine(
     settings.DATABASE_URL_SYNC,
-    echo=settings.DEBUG,
     future=True,
     pool_pre_ping=True,
 )

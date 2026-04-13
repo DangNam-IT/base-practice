@@ -7,7 +7,10 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     DATABASE_URL: str = "postgresql://user:password@localhost:5432/library_management"
     DATABASE_URL_SYNC: str = "postgresql://user:password@localhost:5432/library_management"
- 
+    # Application
+    APP_NAME: str = "Library Management System"
+    APP_VERSION: str = "1.0.0"
+    DEBUG: bool=True
     class Config:
         env_file = ".env"
  
