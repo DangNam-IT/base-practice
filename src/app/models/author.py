@@ -1,9 +1,7 @@
 from datetime import datetime
 from sqlalchemy import Column, DateTime, Integer, String, Text
 from sqlalchemy.orm import relationship
-from sqlalchemy.orm import declarative_base
-
-Base = declarative_base()
+from app.database import Base
 
 class Author(Base):
     __tablename__ = "authors"

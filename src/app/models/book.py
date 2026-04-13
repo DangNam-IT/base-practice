@@ -1,8 +1,7 @@
 from datetime import datetime
 from sqlalchemy import Column, DateTime,Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
-from sqlalchemy.orm import declarative_base
-Base = declarative_base()
+from app.database import Base
 
 class Book(Base):
     __tablename__ = "books"
