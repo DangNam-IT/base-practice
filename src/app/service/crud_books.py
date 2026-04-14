@@ -14,6 +14,8 @@ def get_book(db: Session, book_id: int) -> Optional[Book]:
         .filter(Book.id == book_id)
         .first()
     )
+def get_book_by_isbn(db: Session, isbn: str) -> Optional[Book]:
+    return db.query(Book).filter(Book.isbn == isbn).first()
 
 def get_books(
     db: Session,
