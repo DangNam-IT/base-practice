@@ -8,11 +8,13 @@ class AuthorBase(BaseModel):
 class AuthorUpdate(BaseModel):
     name: Optional[str] = Field(None, min_length=1, max_length=100)
     bio: Optional[str] = None
+    updated_at: Optional[datetime] = datetime.utcnow()
 
 class AuthorResponse(AuthorBase):
     id: int
     name: str
     bio: Optional[str] = None
     created_at: datetime
+    updated_at: datetime
     model_config = {"from_attributes": True}
  
