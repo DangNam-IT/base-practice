@@ -27,8 +27,6 @@ def get_books(
     Trả về (items, total).
     - search   : tìm theo title (ILIKE)
     - author_id: filter theo tác giả
-    - min/max_price: filter theo khoảng giá
-    - is_available : filter theo trạng thái
     """
     query = db.query(Book).options(joinedload(Book.author))
 
