@@ -71,7 +71,7 @@ def get_current_user(
     if username is None:
         raise credentials_exception
 
-    user = db.query(User).filter(username == username).first()
+    user = db.query(User).filter(User.username == username).first()
     if user is None:
         raise credentials_exception
 
@@ -86,10 +86,10 @@ def get_current_active_user(
 
 
 def require_admin(
-    current_user: User = Depends(get_current_active_user),
+    current_user: User = Depends(get_current_user),
 ) -> User:
     """Dependency: chỉ admin mới được phép."""
-    if not current_user.is_admin:
+    if not current_user.username == "admin":
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Bạn không có quyền thực hiện hành động này",
