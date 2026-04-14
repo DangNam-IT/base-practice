@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
-from app.api import auth
+from app.api import auth, authors, books
 from contextlib import asynccontextmanager
 from app.database import Base, engine
 from app.models.user import User   # Import models to ensure they are registered with SQLAlchemy
@@ -33,7 +33,8 @@ app.add_middleware(
 
 # Include all routers
 app.include_router(auth.router)
-
+app.include_router(authors.router)
+app.include_router(books.router)
 
 # Health check endpoint
 @app.get("/health", tags=["health"])
