@@ -1,7 +1,19 @@
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, TypeVar, Generic, List
 from datetime import datetime
-from schemas.authors import AuthorResponse
+from app.schemas.authors import AuthorResponse
+
+T = TypeVar("T")
+ 
+class PaginatedResponse(BaseModel, Generic[T]):
+    """Generic pagination wrapper dùng cho mọi list endpoint."""
+    items: List[T]
+    total: int
+    page: int
+    page_size: int
+    total_pages: int
+ 
+
 class BookBase(BaseModel):
     title: str = Field(..., min_length=1, max_length=200)
     isbn: Optional[str] = Field(None, max_length=20)
