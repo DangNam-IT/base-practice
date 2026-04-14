@@ -3,11 +3,10 @@ from typing import Optional, Tuple, List
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 from app.schemas.authors import AuthorBase, AuthorUpdate
-from app.models.author import Author 
+from app.models.author import Author
+from app.models.book import Book
 
-
-
-def get_author(db: Session, author_id: int) -> Optional[Author]:
+def get_author_by_id(db: Session, author_id: int) -> Optional[Author]:
     return db.query(Author).filter(Author.id == author_id).first()
 
 
@@ -44,7 +43,7 @@ def get_authors(
     return items, total
 
 
-def create_author(db: Session, author_in: AuthorBase) -> Author:
+def create_new_author(db: Session, author_in: AuthorBase) -> Author:
     author = Author(**author_in.model_dump())
     db.add(author)
     db.commit()
@@ -52,7 +51,7 @@ def create_author(db: Session, author_in: AuthorBase) -> Author:
     return author
 
 
-def update_author(
+def update_current_author(
     db: Session,
     author: Author,
     author_in: AuthorUpdate,
@@ -65,6 +64,12 @@ def update_author(
     return author
 
 
-def delete_author(db: Session, author: Author) -> None:
+def delete_current_author(db: Session, author: Author) -> None:
     db.delete(author)
     db.commit()
+    return f"Author {author.name} deleted successfully"
+
+def get_book_count(db: Session, author_id: int) -> int:
+    return db.query(func.count(Book.id)).filter(
+        Book.author_id == author_id
+    ).scalar()
