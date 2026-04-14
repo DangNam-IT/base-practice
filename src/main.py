@@ -4,7 +4,7 @@ from app.config import settings
 from app.api import auth, authors, books
 from contextlib import asynccontextmanager
 from app.database import Base, engine
-from app.models.user import User   # Import models to ensure they are registered with SQLAlchemy
+from app.models.user import User
 from app.models.book import Book
 from app.models.author import Author
 
