@@ -5,7 +5,9 @@ from sqlalchemy.orm import Session
 from app.schemas.authors import AuthorBase, AuthorUpdate
 from app.models.author import Author
 from app.models.book import Book
+from app.logger import get_logger
 
+logger = get_logger(__name__)
 def get_author_by_id(db: Session, author_id: int) -> Optional[Author]:
     return db.query(Author).filter(Author.id == author_id).first()
 
@@ -40,6 +42,7 @@ def get_authors(
         .limit(page_size)
         .all()
     )
+    logger.debug(f"get_authors: page={page}, total={total}")
     return items, total
 
 
@@ -48,6 +51,7 @@ def create_new_author(db: Session, author_in: AuthorBase) -> Author:
     db.add(author)
     db.commit()
     db.refresh(author)
+    logger.info(f'Author created: id = {author.id}, name = {author.name}')
     return author
 
 
@@ -61,13 +65,14 @@ def update_current_author(
         setattr(author, field, value)
     db.commit()
     db.refresh(author)
+    logger.info(f'Author updated: id = {author.id}, name = {author.name}')
     return author
 
 
 def delete_current_author(db: Session, author: Author) -> None:
     db.delete(author)
     db.commit()
-    return f"Author {author.name} deleted successfully"
+    logger.info(f'Author deleted: id = {author.id}, name = {author.name}')
 
 def get_book_count(db: Session, author_id: int) -> int:
     return db.query(func.count(Book.id)).filter(
