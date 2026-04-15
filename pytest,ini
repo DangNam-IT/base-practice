@@ -1,0 +1,9 @@
+[pytest]
+testpaths = test
+pythonpath = src 
+asyncio_mode = auto
+
+[pytest:ini_options]
+env =
+    DATABASE_URL=sqlite:///:memory:
+    SECRET_KEY=test-secret-key-for-testing-only
