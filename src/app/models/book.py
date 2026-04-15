@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, UTC
 from sqlalchemy import Column, DateTime,Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
 from app.database import Base
@@ -10,8 +10,8 @@ class Book(Base):
     title = Column(String(200), nullable=False, index=True)
     isbn = Column(String(20), unique=True, nullable=True, index=True)
     is_available = Column(Boolean, default=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.now(UTC))
+    updated_at = Column(DateTime, default=datetime.now(UTC), onupdate=datetime.now(UTC))
 
     # Foreign key → Author
     author_id = Column(Integer, ForeignKey("authors.id"), nullable=False)
