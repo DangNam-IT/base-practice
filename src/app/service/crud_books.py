@@ -13,7 +13,7 @@ logger = get_logger(__name__)
 def get_book(db: Session, book_id: int) -> Optional[Book]:
     return (
         db.query(Book)
-        .options(joinedload(Book.author))   # eager load tránh N+1
+        .options(joinedload(Book.author))
         .filter(Book.id == book_id)
         .first()
     )

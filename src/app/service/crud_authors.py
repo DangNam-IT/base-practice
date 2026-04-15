@@ -72,7 +72,7 @@ def update_current_author(
 def delete_current_author(db: Session, author: Author) -> None:
     db.delete(author)
     db.commit()
-    logger.info(f'Author deleted: id = {author.id}, name = {author.name}')
+    logger.warning(f'Author deleted: id = {author.id}, name = {author.name}')
 
 def get_book_count(db: Session, author_id: int) -> int:
     return db.query(func.count(Book.id)).filter(
