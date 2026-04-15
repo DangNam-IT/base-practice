@@ -1,6 +1,5 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, UTC
 from typing import Optional
-
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 
@@ -32,7 +31,7 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
     to_encode = data.copy()
-    expire = datetime.utcnow() + (
+    expire = datetime.now(UTC) + (
         expires_delta or timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     )
     to_encode.update({"exp": expire})
@@ -89,7 +88,7 @@ def require_admin(
     current_user: User = Depends(get_current_user),
 ) -> User:
     """Dependency: chỉ admin mới được phép."""
-    if not current_user.username == "admin":
+    if not current_user.role == "admin":
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Bạn không có quyền thực hiện hành động này",
