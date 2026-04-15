@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, UTC
 from typing import Optional
 from pydantic import BaseModel, Field
 class AuthorBase(BaseModel):
@@ -8,7 +8,6 @@ class AuthorBase(BaseModel):
 class AuthorUpdate(BaseModel):
     name: Optional[str] = Field(None, min_length=1, max_length=100)
     bio: Optional[str] = None
-    updated_at: Optional[datetime] = datetime.utcnow()
 
 class AuthorResponse(AuthorBase):
     id: int

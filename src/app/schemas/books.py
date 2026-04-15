@@ -36,6 +36,7 @@ class BookResponse(BookBase):
     id: int
     title: Optional[str]= Field(..., min_length=1, max_length=200)
     created_at: datetime
+    updated_at: datetime
     author: AuthorResponse
  
     model_config = {"from_attributes": True}
