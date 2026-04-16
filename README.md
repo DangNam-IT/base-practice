@@ -17,22 +17,22 @@ base-practice/
     │ ├── logger.py     # define, set up format for log (Debug, Info, Error, Warning) 
     │ ├── database.py   # Cấu hình kết nối DB & Session
     │ ├── models/       # SQLAlchemy Models (Database tables)
-        ├── author.py
-        ├── book.py
-        ├── user.py
+    │ │   ├── author.py
+    │ │   ├── book.py
+    │ │   └── user.py
     │ ├── schemas/      # Pydantic Models (Data validation/API Response)
-        ├── books.py
-        ├── authors.py
-        ├── token.py
-        ├── books.py
+    │ │   ├── books.py
+    │ │   ├── authors.py
+    │ │   ├── token.py
+    │ │   └── books.py
     │ ├── service/      # Logic thao tác Database
-        ├── crud_authors.py
-        ├── crud_books.py
-    │ ├── api/          # Thư mục chứa các route
-        ├── auth.py
-        ├── authors.py
-        ├── books.py
-    ├──venv/ 
+    │ │   ├── crud_authors.py
+    │ │   └── crud_books.py
+    │ └── api/          # Thư mục chứa các route
+    │    ├── auth.py
+    │    ├── authors.py
+    │    └── books.py
+    ├── venv/ 
     ├── .gitignore
     ├── .env            # Biến môi trường (DB_URL, SECRET_KEY)
     ├── requirements.txt
