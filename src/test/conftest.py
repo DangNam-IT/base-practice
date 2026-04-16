@@ -14,7 +14,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
 from app.database import Base, get_db
-from main import app
+from app.main import app
 from app.models.author import Author
 from app.models.book import Book
 from app.models.user import User 
