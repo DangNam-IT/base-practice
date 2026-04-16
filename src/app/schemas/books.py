@@ -1,6 +1,6 @@
 import re
 from pydantic import BaseModel, Field, field_validator
-from typing import Optional, TypeVar, Generic, List
+from typing import Optional, TypeVar, Generic, List, Annotated
 from datetime import datetime
 from app.schemas.authors import AuthorResponse
 
@@ -16,8 +16,8 @@ class PaginatedResponse(BaseModel, Generic[T]):
  
 
 class BookBase(BaseModel):
-    title: str = Field(..., min_length=1, max_length=200)
-    isbn: Optional[str] = Field(None, max_length=20)
+    title: Annotated[str, Field(..., min_length=1, max_length=200)]
+    isbn: Optional[Annotated[str, Field(None, max_length=20)]] = None
     is_available: bool = True
     author_id: int
 
@@ -31,8 +31,8 @@ class BookCreate(BookBase):
  
 
 class BookUpdate(BaseModel):
-    title: Optional[str] = Field(None, min_length=1, max_length=200)
-    isbn: Optional[str] = Field(None, max_length=20)
+    title: Optional[Annotated[str, Field(None, min_length=1, max_length=200)]] = None
+    isbn: Optional[Annotated[str, Field(None, max_length=20)]] = None
     @field_validator("isbn")
     @classmethod
     def validate_isbn(cls, v: Optional[str]) -> Optional[str]:
@@ -43,7 +43,7 @@ class BookUpdate(BaseModel):
  
 class BookResponse(BookBase):
     id: int
-    title: Optional[str]= Field(..., min_length=1, max_length=200)
+    title: Optional[Annotated[str, Field(..., min_length=1, max_length=200)]] = None
     created_at: datetime
     updated_at: datetime
     author: AuthorResponse

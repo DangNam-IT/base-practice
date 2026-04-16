@@ -1,12 +1,12 @@
 from datetime import datetime, UTC
-from typing import Optional
+from typing import Optional, Annotated
 from pydantic import BaseModel, Field
 class AuthorBase(BaseModel):
-    name: str = Field(..., min_length=1, max_length=100)
+    name: Annotated[str, Field(..., min_length=1, max_length=100)]
     bio: Optional[str] = None
  
 class AuthorUpdate(BaseModel):
-    name: Optional[str] = Field(None, min_length=1, max_length=100)
+    name: Optional[Annotated[str, Field(None, min_length=1, max_length=100)]] = None
     bio: Optional[str] = None
 
 class AuthorResponse(AuthorBase):

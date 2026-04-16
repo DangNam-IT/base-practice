@@ -1,9 +1,10 @@
 from pydantic import BaseModel, Field, field_validator
 from datetime import datetime
+from typing import Annotated
 
 class UserCreate(BaseModel):
-    username: str = Field(..., min_length=3, max_length=50)
-    password: str = Field(..., min_length=6, max_length=100)
+    username: Annotated[str, Field(..., min_length=3, max_length=50)]
+    password: Annotated[str, Field(..., min_length=6, max_length=100)]
  
     @field_validator("username")
     @classmethod
