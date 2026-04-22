@@ -130,3 +130,5 @@ app.dependency_overrides[get_db] = override_get_db
 ## 🛠 IV. Mẹo nhỏ (Pro-tips)
 * **Thứ tự Import:** Trong file `conftest.py`, luôn đặt `os.environ` lên đầu để đảm bảo app nhận cấu hình Test trước khi khởi tạo DB.
 * **Autoflush:** Trong `sessionmaker`, `autoflush=True` giúp bạn thấy ngay dữ liệu vừa `add` khi thực hiện truy vấn ngay sau đó mà không cần gọi `flush()` thủ công.
+
+Tôi là người ngoài
