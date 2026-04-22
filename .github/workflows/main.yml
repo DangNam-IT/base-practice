@@ -8,7 +8,7 @@ on:
 
 jobs:
   # --- GIAI ĐOẠN CI: Kiểm tra code ---
-  build-and-test:
+  run-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
