@@ -1,0 +1,31 @@
+name: FastAPI CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]  # Chạy khi push vào nhánh main
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  # --- GIAI ĐOẠN CI: Kiểm tra code ---
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Tests
+        run: |
+          pytest test_auth.py -v
+          pytest test_author.py -v
+          pytest test_book.py -v
