@@ -27,6 +27,4 @@ jobs:
 
       - name: Run Tests
         run: |
-          pytest test_auth.py -v
-          pytest test_author.py -v
-          pytest test_book.py -v
+          pytest test/ -v
