@@ -1,14 +1,15 @@
 from fastapi import FastAPI, Request, Response
 from typing import Callable
+from app.database import Base, engine
+from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
+from app.logger import get_logger, setup_logging
 from app.api import auth, authors, books
-from contextlib import asynccontextmanager
-from app.database import Base, engine
 from app.models.user import User
 from app.models.book import Book
 from app.models.author import Author
-from app.logger import get_logger, setup_logging
+
 
 
 logger = get_logger(__name__)
